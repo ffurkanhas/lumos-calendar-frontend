@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<title>LUMOS CELENDAR</title>
+</head>
+<body>
+
+  <div >
+
+
+
+  </div>
+
+  <form >
+    Tittle<br>
+    <input type="text" id = "title" name="firstname">
+    <br>
+    Description:<br>
+    <input type="text" id = "description"name="lastname" >
+    <br>
+    Start Date:<br>
+    <input type="text" id = "s_date" name="lastname" >
+    <br>
+    End Date:<br>
+    <input type="text" id = "e_date"name="lastname" >
+    <br>
+    Reminder:<br>
+    <input type="text" id = "reminder"name="lastname" >
+    <br>
+    <input type="button" value="Make appointment" onclick="sendData()">
+  </form>
+
+
+<script type="text/javascript">
+
+
+function getData() {
+$.get( "https://lumos-calendar-api-deneme.herokuapp.com/calendars", function( data ) {
+
+});
+}
+
+
+function sendData() {
+
+  var title = document.getElementById("title").value;
+  var description = document.getElementById("description").value;
+  var start_date = document.getElementById("s_date").value;
+  var end_date = document.getElementById("e_date").value;
+  var reminder = document.getElementById("reminder").value;
+  var myObject = {"userid":"null",
+                  "title":title,
+                  "description":description,
+                  "start_date":start_date,
+                  "end_date":end_date,
+                  "reminder":reminder,
+                  "recurring":"null"};
+
+$.ajax({
+
+    url:'https://lumos-calendar-api-deneme.herokuapp.com/calendars',
+    type:'POST',
+    dataType:'json',
+    data : JSON.stringify(myObject),
+     contentType: "application/json; charset=utf-8",
+    success:function(data) {
+      console.log(data.title);
+    }
+
+});
+}
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
