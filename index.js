@@ -1,15 +1,44 @@
 var baseUrl = "https://lumos-calendar-api.herokuapp.com/calendar/api/v1/events";
 
+function sendData() {
+
+  var title = document.getElementById("title").value;
+  var description = document.getElementById("description").value;
+  var start_date = document.getElementById("s_date").value;
+  var end_date = document.getElementById("e_date").value;
+  var reminder = document.getElementById("reminder").value;
+  var myObject = {"userid":"null",
+                  "title":title,
+                  "description":description,
+                  "start_date":start_date,
+                  "end_date":end_date,
+                  "reminder":reminder,
+                  "recurring":"null"};
+
+$.ajax({
+
+    url:baseUrl,
+    type:'POST',
+    dataType:'json',
+    data : JSON.stringify(myObject),
+     contentType: "application/json; charset=utf-8",
+    success:function(data) {
+      console.log(data.title);
+    }
+
+});
+}
+
 function getData() {
 $.get(baseUrl, function( data ) {
-  console.log(data);
   return data;
   });
 }
 
 function search(key) {
   $.get(baseUrl + "/search/" + key, function( data ) {
-  return data;
+    console.log(data);
+    return data;
   });
 }
 
@@ -43,7 +72,6 @@ function send() {
   });
 
 }
-
 function tableCreate() {
     var body = document.getElementById("appointments");
     body.innerHTML = "";
@@ -55,8 +83,8 @@ function tableCreate() {
     var tbdy = document.createElement('tbody');
 
     var date = document.getElementById("date").value;
-    var dates = search("sprint");
-    console.log(dates)
+    var dates = search("emre");
+    console.log(dates);
 
     var tr = document.createElement('tr');
     var th1 = document.createElement('th');
@@ -80,6 +108,4 @@ function tableCreate() {
     tbl.appendChild(thead);
     tbl.appendChild(tbdy);
     body.appendChild(tbl);
-
-
 }
