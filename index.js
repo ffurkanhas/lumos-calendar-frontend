@@ -1,4 +1,5 @@
 
+var baseUrl = "https://lumos-calendar-api.herokuapp.com/calendar/api/v1/events";
 
 function sendData() {
 
@@ -17,7 +18,7 @@ function sendData() {
 
 $.ajax({
 
-    url:'https://lumos-calendar-api-deneme.herokuapp.com/api/v1/calendars',
+    url:baseUrl,
     type:'POST',
     dataType:'json',
     data : JSON.stringify(myObject),
@@ -30,14 +31,14 @@ $.ajax({
 }
 
 function getData() {
-$.get( "https://lumos-calendar-api-deneme.herokuapp.com/api/v1/calendars", function( data ) {
+$.get(baseUrl, function( data ) {
 return data;
   });
 }
 
 function search(key) {
 
-  $.get( "https://lumos-calendar-api-deneme.herokuapp.com/api/v1/calendars/search/"+key, function( data ) {
+  $.get(baseUrl + "/search/" + key, function( data ) {
 return data;
   });
 
@@ -47,24 +48,23 @@ function send() {
 
   var title = document.getElementById("title").value;
   var description = document.getElementById("description").value;
-  var date = document.getElementById("date").value;
   var start_time = document.getElementById("start_time").value;
   var end_time = document.getElementById("end_time").value;
   var reminder = document.getElementById("reminder").value;
   var recurring = document.getElementById("recurring").value;
 
-    var myObject = {"userid":"null",
+    var myObject = {"user_id":null,
                   "title":title,
                   "description":description,
-                  "date":date,
                   "start_time":start_time,
                   "end_time":end_time,
                   "reminder":reminder,
-                  "recurring":"null"};
+                  "recurring":null};
+    console.log(myObject);
 
 $.ajax({
 
-    url:'https://lumos-calendar-api-deneme.herokuapp.com/api/v1/calendars',
+    url:baseUrl,
     type:'POST',
     dataType:'json',
     data : JSON.stringify(myObject),
