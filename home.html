@@ -26,11 +26,19 @@
                </ul>
             </div>
               <div class="tab-content">
-                 <div id="appointments" onload="tableCreate()"class="tab-pane fade in active">
+                 <div id="appointments" class="tab-pane fade in active">
+          
                  
                  </div>
                  <div id="search" class="tab-pane fade in active">
-                 
+                  <div>
+                    <label>Search</label>
+                    <input class="form-control" type="text"  id ="searchhKey" name="Search">
+                    <button type="button" class="btn" onclick="searchTable()">Ara</button>
+                  </div>
+                  <div id ="onHere">
+                    
+                  </div>
                  </div>
               </div>
 
@@ -171,19 +179,28 @@
                   today: true,
                   show_days: true,
                   weekstartson: 0,
+                  modal : true,
+                     legend: [
+                        {type: "text", label: "", badge: "00"},
+       
+                  ],
+                      ajax: {
+      url: "show_data.php",
+      modal: true
+    },
                   nav_icon: {
-                  prev: '<i class="fa fa-chevron-circle-left"></i>',
-                   next: '<i class="fa fa-chevron-circle-right"></i>'
+                     prev: '<i class="fa fa-chevron-circle-left"></i>',
+                    next: '<i class="fa fa-chevron-circle-right"></i>'
                     },
-
-                    data: getData(),
+                    data: setEvents(),
                     action: function () {
+
                         //get the selected date
                         var date = $('#' + this.id).data('date');
                         //alert the date
                                                 
                        document.getElementById("date").value = date;
-                      tableCreate();
+                      showAppointment();
                     },
                     today: true
                 });
