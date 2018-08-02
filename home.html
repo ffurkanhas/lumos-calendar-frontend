@@ -3,206 +3,176 @@
     <head>
         <title>LUMOS CALENDAR</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
         <link href="./plugins/zabuto_calendar.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="./plugins/zabuto_calendar.min.js"></script>
+        <script src="./index.js"></script>
         <meta charset="UTF-8">
     </head>
+
     <body>
-      <script type="text/javascript">
-        var global_date;
-      </script>
-
-
-
         <div class ="container">
             <div class = "col-md-7">
-              <div id="div2-1" style="height:50%;">
-              <div id="calendar" style="width: 500px; margin: 0 auto;"></div>
-            </div>
-            <div id="div2-1" style="height:50%;">
+                <div id="div2-1" style="height:50%;">
+                  <div id="calendar" style="width: 500px; margin: 0 auto;"></div>
+                </div>
 
-                <ul class="nav nav-tabs">
-               <li class="active"><a data-toggle="tab" href="#appointments">Appointments</a></li>
-               <li><a data-toggle="tab" href="#search">Search</a></li>
-               </ul>
-            </div>
-              <div class="tab-content">
-                 <div id="appointments" class="tab-pane fade in active">
-          
-                 
-                 </div>
-                 <div id="search" class="tab-pane fade in active">
-                  <div>
-                    <label>Search</label>
-                    <input class="form-control" type="text"  id ="searchhKey" name="Search">
-                    <button type="button" class="btn" onclick="searchTable()">Ara</button>
-                  </div>
-                  <div id ="onHere">
-                    
-                  </div>
-                 </div>
-              </div>
+                <div id="div2-1" style="height:50%;">
+                   <ul class="nav nav-tabs">
+                   <li class="active"><a data-toggle="tab" href="#appointments">Appointments</a></li>
+                   <li class=""><a data-toggle="tab" href="#search">Search</a></li>
+                   </ul>
+                </div>
 
+                <div class="tab-content">
+                   <div id="appointments" class="tab-pane fade in active"></div>
+                   <div id="search" class="tab-pane">
+                    <div>
+                      <label>Search</label>
+                      <input class="form-control" type="text"  id ="searchKey" name="Search">
+                      <button type="button" class="btn" onclick="searchTable()">Ara</button>
+                    </div>
+                    <div id ="onHere">
+
+                    </div>
+                   </div>
+                </div>
             </div>
+
              <div class = "col-md-5">
               <form action="">
-            
-              
+
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title">
-             
 
-             
                 <label for="description">Description:</label>
                 <input type="text" class="form-control" id="description">
 
                 <label for="date">Date:</label>
                 <input type="text"  class="form-control" id="date" readonly="true">
- 
 
                 <label for="start_time">Start Time:</label>
                   <select class="form-control" id="start_time_hour">
-                  <option>01</option>
-                  <option>02</option>
-                  <option>03</option>
-                  <option>04</option>
-                  <option>05</option>
-                  <option>06</option>
-                  <option>07</option>
-                  <option>08</option>
-                  <option>09</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>13</option>
-                  <option>14</option>
-                  <option>15</option>
-                  <option>17</option>
-                  <option>18</option>
-                  <option>19</option>
-                  <option>20</option>
-                  <option>21</option>
-                  <option>22</option>
-                  <option>23</option>
-                  <option>24</option>
+                  <script type="text/javascript">
+                    for (var i = 1; i <= 24; i++) {
+                      if(i < 10){
+                        document.write("<option>0" + i +"</option>")
+                      }
+                      else{
+                        document.write("<option>" + i +"</option>")
+                      }
+                    }
+                  </script>
                   </select>
 
                   <select class="form-control" id="start_time_min">
-                  <option>00</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option>
-                  <option>06</option><option>07</option><option>08</option><option>09</option><option>10</option>
-                  <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-                  <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-                  <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
-                  <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
-                  <option>31</option><option>32</option><option>33</option><option>34</option><option>35</option>
-                  <option>36</option><option>37</option><option>38</option><option>39</option><option>40</option>
-                  <option>41</option><option>42</option><option>43</option><option>44</option><option>45</option>
-                  <option>46</option><option>47</option><option>48</option><option>49</option><option>50</option>
-                  <option>51</option><option>52</option><option>53</option><option>54</option><option>55</option>
-                  <option>56</option><option>57</option><option>58</option><option>59</option>
+                  <script type="text/javascript">
+                    for (var i = 0; i <= 59; i++) {
+                      if(i < 10){
+                        document.write("<option>0" + i +"</option>")
+                      }
+                      else{
+                        document.write("<option>" + i +"</option>")
+                      }
+                    }
+                  </script>
                   </select>
-                  
-          
+
                 <label for="end_time">End Time:</label>
                   <select class="form-control" id="end_time_hour">
-                  <option>01</option>
-                  <option>02</option>
-                  <option>03</option>
-                  <option>04</option>
-                  <option>05</option>
-                  <option>06</option>
-                  <option>07</option>
-                  <option>08</option>
-                  <option>09</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>13</option>
-                  <option>14</option>
-                  <option>15</option>
-                  <option>17</option>
-                  <option>18</option>
-                  <option>19</option>
-                  <option>20</option><option>21</option><option>22</option><option>23</option><option>24</option>
+                  <script type="text/javascript">
+                    for (var i = 1; i <= 24; i++) {
+                      if(i < 10){
+                        document.write("<option>0" + i +"</option>")
+                      }
+                      else{
+                        document.write("<option>" + i +"</option>")
+                      }
+                    }
+                  </script>
                   </select>
 
                   <select class="form-control" id="end_time_min">
-                  <option>00</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option>
-                  <option>06</option><option>07</option><option>08</option><option>09</option><option>10</option>
-                  <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-                  <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-                  <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
-                  <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
-                  <option>31</option><option>32</option><option>33</option><option>34</option><option>35</option>
-                  <option>36</option><option>37</option><option>38</option><option>39</option><option>40</option>
-                  <option>41</option><option>42</option><option>43</option><option>44</option><option>45</option>
-                  <option>46</option><option>47</option><option>48</option><option>49</option><option>50</option>
-                  <option>51</option><option>52</option><option>53</option><option>54</option><option>55</option>
-                  <option>56</option><option>57</option><option>58</option><option>59</option>
+                  <script type="text/javascript">
+                    for (var i = 0; i <= 59; i++) {
+                      if(i < 10){
+                        document.write("<option>0" + i +"</option>")
+                      }
+                      else{
+                        document.write("<option>" + i +"</option>")
+                      }
+                    }
+                  </script>
                   </select>
-         
+
                 <label for="reminder">Reminder:</label>
                 <input type="text" class="form-control" id="reminder">
 
                  <label for="reminder">Recurring:</label>
                 <input type="text" class="form-control" id="recurring">
-         
+
 
           <button type="button" onclick="send()" class="btn btn-default">Submit</button>
           </form>
             </div>
-          
-        
+
       </div>
-
-
-
-
-
-
-
-
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="./plugins/zabuto_calendar.min.js"></script>
-        <script src="./index.js"></script>
         <script>
             $(document).ready(function () {
-                $('#calendar').zabuto_calendar({
-                    language: 'tr',
-                    year : "2018",
-                    month : "01",
-                    show_previous : true,
-                    show_next : 12,
-                     cell_border: true,
-                  today: true,
-                  show_days: true,
-                  weekstartson: 0,
-                  modal : true,
-                     legend: [
-                        {type: "text", label: "", badge: "00"},
-       
-                  ],
-                      ajax: {
-      url: "show_data.php",
-      modal: true
-    },
-                  nav_icon: {
-                     prev: '<i class="fa fa-chevron-circle-left"></i>',
-                    next: '<i class="fa fa-chevron-circle-right"></i>'
-                    },
-                    data: setEvents(),
-                    action: function () {
+                $.ajax({
+                    url:baseUrl,
+                    type:'GET',
+                    dataType:'json',
+                    contentType: "application/json; charset=utf-8",
+                    success:function(data) {
+                      getData();
+                      var data_length = data.length
 
-                        //get the selected date
-                        var date = $('#' + this.id).data('date');
-                        //alert the date
-                                                
-                       document.getElementById("date").value = date;
-                      showAppointment();
-                    },
-                    today: true
+                      function getEvents(){
+                        var Events = [];
+                        for(var i = 0; i<data_length;i++) {
+                            var titles = data[i].title;
+                            var description = data[i].description;
+                            var str = data[i].start_time;
+                            var str_split = str.split("T");
+                            var tarih = str_split[0];
+                            var badge = "01";
+                            var classname = "purple-event";
+
+                            var myObject = {"title":titles,
+                                            "badge": true,
+                                            "date": tarih }
+                            Events.push(myObject);
+                        }
+                        return Events;
+                      }
+                      $('#calendar').zabuto_calendar({
+                          language: 'tr',
+                          year : "2018",
+                          month : new Date().getMonth()+1,
+                          show_previous : true,
+                          show_next : 12,
+                          cell_border: true,
+                          today: true,
+                          show_days: true,
+                          modal : true,
+                          nav_icon: {
+                            prev: '<i class="fa fa-chevron-circle-left"></i>',
+                            next: '<i class="fa fa-chevron-circle-right"></i>'
+                          },
+                          data: getEvents(),
+                          action: function () {
+                              //get the selected date
+                              var date = $('#' + this.id).data('date');
+                              //alert the date
+                             document.getElementById("date").value = date;
+                            showAppointment();
+                          },
+                          today: true
+                      });
+                    }
                 });
             });
         </script>
