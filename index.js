@@ -17,10 +17,111 @@ function getData() {
   });
 }
 
+function deleteData(id) {
+  $.ajax({
+      url:baseUrl + "/" + id,
+      type:'DELETE',
+      contentType: "application/json; charset=utf-8",
+      success:function(data) {
+        location.reload();
+      }
+  });
+}
+
 function search(key) {
-  $.get(baseUrl + "/search/" + key, function( data ) {
-    lgt_search= data.length;
-    arananDatas = data;
+  $.ajax({
+      url:baseUrl + "/search/" + key,
+      type:'GET',
+      dataType:'json',
+      contentType: "application/json; charset=utf-8",
+      success:function(data) {
+        lgt_search= data.length;
+        arananDatas = data;
+
+        var div = document.getElementById("onHere");
+
+        div.innerHTML="";
+        var tbl = document.createElement('table');
+        tbl.setAttribute('class', 'table table-striped');
+        tbl.setAttribute('id', 'table');
+
+        var thead = document.createElement('thead');
+        var tr = document.createElement('tr');
+
+        var th0 = document.createElement('th');
+        var th0_text = document.createTextNode("ID");
+        th0.appendChild(th0_text);
+        tr.appendChild(th0);
+
+        var th1 = document.createElement('th');
+        var th1_text = document.createTextNode("Title");
+        th1.appendChild(th1_text);
+        tr.appendChild(th1);
+
+        var th2 = document.createElement('th');
+        var th2_text = document.createTextNode("Descripton");
+        th2.appendChild(th2_text);
+        tr.appendChild(th2);
+
+        var th3 = document.createElement('th');
+        var th3_text = document.createTextNode("Start Time");
+        th3.appendChild(th3_text);
+        tr.appendChild(th3);
+
+        var th4 = document.createElement('th');
+        var th4_text = document.createTextNode("End Time");
+        th4.appendChild(th4_text);
+        tr.appendChild(th4);
+
+        var th5 = document.createElement('th');
+        var th5_text = document.createTextNode("Delete");
+        th5.appendChild(th5_text);
+        tr.appendChild(th5);
+
+        thead.appendChild(tr);
+        tbl.appendChild(thead);
+
+        var tbody= document.createElement('tbody');
+        var tr2= document.createElement('tr');
+
+        var date = document.getElementById("date").value;
+
+        tbody.appendChild(tr2);
+        tbl.appendChild(tbody);
+        div.appendChild(tbl);
+
+        for(var i = 0; i < lgt_search; i++) {
+          var id = arananDatas[i].id;
+          var btn = document.createElement('BUTTON');
+          btn.className = "btn btn-danger";
+          btn.onclick = function() {
+            //buraya bi seyler yapman lazim id'yi gormuyo burada anlamadim deleteData() fonksiyonu var yukarida orada ona id'yi gonder
+          };
+          btn.innerHTML = "Delete";
+
+          var start_time = arananDatas[i].start_time;
+          var start_time_split = start_time.split("T");
+
+          var end_time = arananDatas[i].end_time;
+          var end_time_split = end_time.split("T");
+
+          var row = tbl.insertRow(-1);
+
+          var cell0 = row.insertCell(0);
+          var cell1 = row.insertCell(1);
+          var cell2 = row.insertCell(2);
+          var cell3 = row.insertCell(3);
+          var cell4 = row.insertCell(4);
+          var cell5 = row.insertCell(5);
+
+          cell0.innerHTML = arananDatas[i].id;
+          cell1.innerHTML = arananDatas[i].title;
+          cell2.innerHTML = arananDatas[i].description;
+          cell3.innerHTML = start_time_split[0] + " " + start_time_split[1];
+          cell4.innerHTML = end_time_split[0] + " " + end_time_split[1];
+          cell5.appendChild(btn);
+        }
+      }
   });
 }
 
@@ -47,6 +148,7 @@ function send() {
       contentType: "application/json; charset=utf-8",
       success:function(data) {
         alert(data.title + " is added");
+        location.reload();
       }
   });
 }
@@ -60,6 +162,12 @@ function showAppointment() {
         tbl.setAttribute('id', 'table');
         var thead = document.createElement('thead');
         var tr = document.createElement('tr');
+
+        var th0 = document.createElement('th');
+        var th0_text = document.createTextNode("ID");
+        th0.appendChild(th0_text);
+        tr.appendChild(th0);
+
         var th1 = document.createElement('th');
         var th1_text = document.createTextNode("Title");
         th1.appendChild(th1_text);
@@ -97,87 +205,27 @@ function showAppointment() {
           var str = datas[i].start_time;
           var str_split = str.split("T");
           var tarih = str_split[0];
-          var row = tbl.insertRow(-1);
 
           if(tarih == date) {
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
+            var start_time = datas[i].start_time;
+            var start_time_split = start_time.split("T");
 
+            var end_time = datas[i].end_time;
+            var end_time_split = end_time.split("T");
+
+            var row = tbl.insertRow(-1);
+
+            var cell0 = row.insertCell(0);
+            var cell1 = row.insertCell(1);
+            var cell2 = row.insertCell(2);
+            var cell3 = row.insertCell(3);
+            var cell4 = row.insertCell(4);
+
+            cell0.innerHTML = datas[i].id;
             cell1.innerHTML = datas[i].title;
             cell2.innerHTML = datas[i].description;
-            cell3.innerHTML = datas[i].start_time;
-            cell4.innerHTML = datas[i].end_time;
+            cell3.innerHTML = start_time_split[0] + " " + start_time_split[1];
+            cell4.innerHTML = end_time_split[0] + " " + end_time_split[1];
           }
         }
-}
-
-function searchTable() {
-
-  var key = document.getElementById("searchKey").value;
-
-  search(key);
-
-  var div = document.getElementById("onHere");
-
-  div.innerHTML="";
-  var tbl = document.createElement('table');
-  tbl.setAttribute('class', 'table table-striped');
-  tbl.setAttribute('id', 'table');
-
-  var thead = document.createElement('thead');
-  var tr = document.createElement('tr');
-
-  var th1 = document.createElement('th');
-  var th1_text = document.createTextNode("Title");
-  th1.appendChild(th1_text);
-  tr.appendChild(th1);
-
-  var th2 = document.createElement('th');
-  var th2_text = document.createTextNode("Descripton");
-  th2.appendChild(th2_text);
-  tr.appendChild(th2);
-
-  var th3 = document.createElement('th');
-  var th3_text = document.createTextNode("Start Time");
-  th3.appendChild(th3_text);
-  tr.appendChild(th3);
-
-  var th4 = document.createElement('th');
-  var th4_text = document.createTextNode("End Time");
-  th4.appendChild(th4_text);
-  tr.appendChild(th4);
-
-  thead.appendChild(tr);
-  tbl.appendChild(thead);
-
-  var tbody= document.createElement('tbody');
-  var tr2= document.createElement('tr');
-  tbody.appendChild(tr2);
-
-  var date = document.getElementById("date").value;
-
-  tbl.appendChild(tbody);
-  div.appendChild(tbl);
-  var table = document.getElementById("table");
-
-  for(var i =0;i<lgt_search;i++) {
-    var str = arananDatas[i].start_time;
-    var str_split = str.split("T");
-
-    var tarih = str_split[0];
-    //console.log(tarih);
-    var row = tbl.insertRow(-1);
-
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-
-    cell1.innerHTML = arananDatas[i].title;
-    cell2.innerHTML = arananDatas[i].description;
-    cell3.innerHTML = arananDatas[i].start_time;
-    cell4.innerHTML = arananDatas[i].end_time;
-  }
 }

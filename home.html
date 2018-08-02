@@ -18,32 +18,35 @@
                 <div id="div2-1" style="height:50%;">
                   <div id="calendar" style="width: 500px; margin: 0 auto;"></div>
                 </div>
-
                 <div id="div2-1" style="height:50%;">
                    <ul class="nav nav-tabs">
                    <li class="active"><a data-toggle="tab" href="#appointments">Appointments</a></li>
                    <li class=""><a data-toggle="tab" href="#search">Search</a></li>
                    </ul>
                 </div>
-
                 <div class="tab-content">
                    <div id="appointments" class="tab-pane fade in active"></div>
                    <div id="search" class="tab-pane">
                     <div>
                       <label>Search</label>
-                      <input class="form-control" type="text"  id ="searchKey" name="Search">
-                      <button type="button" class="btn" onclick="searchTable()">Ara</button>
+                      <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                              <input class="form-control" type="text"  id ="searchKey" name="Search">
+                            </div>
+                            <div class="col-sm-1">
+                              <button type="button" class="btn" onclick="search(document.getElementById('searchKey').value)">Ara</button>
+                            </div>
+                        </div>
+                      </div>
                     </div>
-                    <div id ="onHere">
-
-                    </div>
+                    <div id ="onHere"><!-- Fill here on index.js --></div>
                    </div>
                 </div>
             </div>
 
              <div class = "col-md-5">
               <form action="">
-
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title">
 
@@ -54,72 +57,85 @@
                 <input type="text"  class="form-control" id="date" readonly="true">
 
                 <label for="start_time">Start Time:</label>
-                  <select class="form-control" id="start_time_hour">
-                  <script type="text/javascript">
-                    for (var i = 1; i <= 24; i++) {
-                      if(i < 10){
-                        document.write("<option>0" + i +"</option>")
-                      }
-                      else{
-                        document.write("<option>" + i +"</option>")
-                      }
-                    }
-                  </script>
-                  </select>
-
-                  <select class="form-control" id="start_time_min">
-                  <script type="text/javascript">
-                    for (var i = 0; i <= 59; i++) {
-                      if(i < 10){
-                        document.write("<option>0" + i +"</option>")
-                      }
-                      else{
-                        document.write("<option>" + i +"</option>")
-                      }
-                    }
-                  </script>
-                  </select>
+                  <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                          <select class="form-control" id="start_time_hour">
+                          <script type="text/javascript">
+                            for (var i = 1; i <= 24; i++) {
+                              if(i < 10){
+                                document.write("<option>0" + i +"</option>")
+                              }
+                              else{
+                                document.write("<option>" + i +"</option>")
+                              }
+                            }
+                          </script>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select class="form-control" id="start_time_min">
+                          <script type="text/javascript">
+                            for (var i = 0; i <= 59; i++) {
+                              if(i < 10){
+                                document.write("<option>0" + i +"</option>")
+                              }
+                              else{
+                                document.write("<option>" + i +"</option>")
+                              }
+                            }
+                          </script>
+                          </select>
+                        </div>
+                    </div>
+                  </div>
 
                 <label for="end_time">End Time:</label>
-                  <select class="form-control" id="end_time_hour">
-                  <script type="text/javascript">
-                    for (var i = 1; i <= 24; i++) {
-                      if(i < 10){
-                        document.write("<option>0" + i +"</option>")
-                      }
-                      else{
-                        document.write("<option>" + i +"</option>")
-                      }
-                    }
-                  </script>
-                  </select>
-
-                  <select class="form-control" id="end_time_min">
-                  <script type="text/javascript">
-                    for (var i = 0; i <= 59; i++) {
-                      if(i < 10){
-                        document.write("<option>0" + i +"</option>")
-                      }
-                      else{
-                        document.write("<option>" + i +"</option>")
-                      }
-                    }
-                  </script>
-                  </select>
+                <div class="row">
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                        <select class="form-control" id="end_time_hour">
+                        <script type="text/javascript">
+                          for (var i = 1; i <= 24; i++) {
+                            if(i < 10){
+                              document.write("<option>0" + i +"</option>")
+                            }
+                            else{
+                              document.write("<option>" + i +"</option>")
+                            }
+                          }
+                        </script>
+                        </select>
+                      </div>
+                      <div class="col-sm-6">
+                        <select class="form-control" id="end_time_min">
+                        <script type="text/javascript">
+                          for (var i = 0; i <= 59; i++) {
+                            if(i < 10){
+                              document.write("<option>0" + i +"</option>")
+                            }
+                            else{
+                              document.write("<option>" + i +"</option>")
+                            }
+                          }
+                        </script>
+                        </select>
+                      </div>
+                  </div>
+                </div>
 
                 <label for="reminder">Reminder:</label>
                 <input type="text" class="form-control" id="reminder">
 
-                 <label for="reminder">Recurring:</label>
+                <label for="reminder">Recurring:</label>
                 <input type="text" class="form-control" id="recurring">
 
-
-          <button type="button" onclick="send()" class="btn btn-default">Submit</button>
-          </form>
+                <button type="button" onclick="send()" class="btn btn-default">Submit</button>
+              </form>
             </div>
+          </div>
 
-      </div>
-        <script>
+          <script>
             $(document).ready(function () {
                 $.ajax({
                     url:baseUrl,
@@ -142,7 +158,6 @@
                             var classname = "purple-event";
 
                             var myObject = {"title":titles,
-                                            "badge": true,
                                             "date": tarih }
                             Events.push(myObject);
                         }
@@ -168,7 +183,7 @@
                               var date = $('#' + this.id).data('date');
                               //alert the date
                              document.getElementById("date").value = date;
-                            showAppointment();
+                             showAppointment();
                           },
                           today: true
                       });
