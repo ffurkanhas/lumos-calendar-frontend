@@ -33,7 +33,7 @@ function deleteData(id) {
   });
 }
 
-function search(key,callback) {
+function search(key) {
 
 
   $.ajax({
@@ -157,7 +157,7 @@ function send() {
   });
 }
 
-function showAppointment(callback) {
+function showAppointment() {
         var div = document.getElementById("appointments");
 
         div.innerHTML="";
@@ -242,6 +242,12 @@ function showAppointment(callback) {
             cell5.appendChild(btn);
             button.push(btn);
 
+            my_id = datas[i].id;
+            btn.addEventListener("click",function(){
+                console.log("EKLIYORUM"+my_id);
+                deleteData(my_id);
+            });
+
             cell0.innerHTML = datas[i].id;
             cell1.innerHTML = datas[i].title;
             cell2.innerHTML = datas[i].description;
@@ -256,9 +262,9 @@ function showAppointment(callback) {
 
         buttons = button;
         ids = id_current;
-        callback();
+       // callback();
 }
-
+/*
 function addListener() {
 
   console.log("Fonksiyona girdim");
@@ -269,16 +275,15 @@ console.log(ids)
 for(var i =0 ; i<buttons.length; i++) {
 
     
-    my_id = ids[i];
-    btn = map.get(ids[i])
-    btn.addEventListener("click",function(){
-      console.log("EKLIYORUM"+my_id);
-      deleteData(int(my_id));
+    buttons[i].addEventListener("click",function(){
+      console.log("EKLIYORUM"+ids[i]);
+      deleteData(ids[i]);
     });
 
-    console.log("EKLENEN ID"+my_id)
+    console.log("EKLENEN ID"+ids[i])
 
     
 }
 
 }
+*/
