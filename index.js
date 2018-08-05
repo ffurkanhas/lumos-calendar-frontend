@@ -268,12 +268,14 @@ console.log(ids)
 
 for(var i =0 ; i<buttons.length; i++) {
 
+    
     my_id = ids[i];
     btn = map.get(ids[i])
     btn.addEventListener("click",function(){
-    console.log("EKLIYORUM"+my_id);
-    deleteData(my_id);
+      console.log("EKLIYORUM"+my_id);
+      deleteData(int(my_id));
     });
+
     console.log("EKLENEN ID"+my_id)
 
     
